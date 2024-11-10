@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LDU FACTORISATION</title>
+    <link rel="stylesheet" href="style.css">
+    <title>LDU FACTORIZATION</title>
 </head>
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LDU FACTORISATION</title>
-</head>
-<body>
-   
-</body>
-</html>
+    <div class="container">
+        <h1>LDU FACTORIZATION</h1>
+        <label>Enter the Order of the Matrix:</label>
+        <input type="number" id="matrix-order" value="3" min="2" max="10" />
+        <button onclick="generateMatrixInput()">Generate Matrix</button>
+        
+        <div id="matrix-input-container"></div>
+        
+        <button onclick="transformToLowerTriangular()">Step 1: Lower Triangular</button>
+        <button onclick="transformToUpperTriangular()">Step 2: Upper & Diagonal</button>
+        <button onclick="transformToUpperIdentity()">Step 3: Upper Identity</button>
+        
+        <div id="transformation-steps"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
