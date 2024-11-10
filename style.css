@@ -116,3 +116,9 @@ input[type="number"] {
     display: flex;
     gap: 10px;
 }
+
+.matrix div span {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+}
