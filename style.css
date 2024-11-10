@@ -27,3 +27,18 @@ h3 {
     text-align: left;
     font-size: 20px;
 }
+
+label {
+    font-weight: bold;
+    color: #555;
+    margin: 10px 0;
+}
+
+input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
