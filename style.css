@@ -67,3 +67,19 @@ button:hover {
     width: 100%;
     max-width: 600px;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+input[type="number"] {
+    width: 60px;
+}
