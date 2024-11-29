@@ -216,3 +216,23 @@ function computeLDU() {
 
     reconstructMatrix(A, L, D, U);
 }
+
+function reconstructMatrix(A, L, D, U) {
+    const order = A.length;
+    let reconstructed = Array.from({ length: order }, () => Array(order).fill(0));
+
+    for (let i = 0; i < order; i++) {
+        for (let j = 0; j < order; j++) {
+            for (let k = 0; k < order; k++) {
+                reconstructed[i][j] += L[i][k] * D[k][k] * U[k][j];
+            }
+        }
+    }
+
+    logStep(reconstructed, "Reconstructed Matrix A = L × D × U:");
+}
+
+
+function transformToUpperIdentity() {
+    computeLDU();
+}
