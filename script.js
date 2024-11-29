@@ -147,3 +147,25 @@ function transformToUpperIdentity() {
     }
 }
 
+
+function addStep(description, matrix) {
+    const stepsOutput = document.getElementById("transformation-steps");
+    let stepDiv = document.createElement("div");
+    stepDiv.innerHTML = `<h3>${description}</h3>${matrixToHTML(matrix)}`;
+    stepsOutput.appendChild(stepDiv);
+}
+
+function matrixToHTML(matrix) {
+    return `<div class="matrix">${matrix.map(row => `<div>${row.map(value => `<span>${toFraction(value)}</span>`).join(' ')}</div>`).join('')}</div>`;
+}
+
+let L = [];
+let D = [];
+let U = [];
+
+
+function resetMatrices(order) {
+    L = Array.from({ length: order }, () => Array(order).fill(0));
+    D = Array.from({ length: order }, () => Array(order).fill(0));
+    U = Array.from({ length: order }, () => Array(order).fill(0));
+}
