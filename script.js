@@ -169,3 +169,16 @@ function resetMatrices(order) {
     D = Array.from({ length: order }, () => Array(order).fill(0));
     U = Array.from({ length: order }, () => Array(order).fill(0));
 }
+
+function computeLDU() {
+    const order = parseInt(document.getElementById("matrix-order").value);
+    let A = [];
+    resetMatrices(order);
+
+
+    for (let i = 0; i < order; i++) {
+        A[i] = [];
+        for (let j = 0; j < order; j++) {
+            A[i][j] = parseFloat(document.getElementById(`a${i}${j}`).value) || 0;
+        }
+    }
