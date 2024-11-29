@@ -39,3 +39,48 @@ function generateMatrixInput() {
     container.innerHTML = table;
     document.getElementById("transformation-steps").innerHTML = "";
 }
+
+function logStep(matrix, message) {
+    const stepsContainer = document.getElementById("transformation-steps");
+    const order = matrix.length;
+    let stepMessage = document.createElement("p");
+    stepMessage.textContent = message;
+    stepsContainer.appendChild(stepMessage);
+
+    let table = document.createElement("table");
+    for (let i = 0; i < order; i++) {
+        let row = document.createElement("tr");
+        for (let j = 0; j < order; j++) {
+            let cell = document.createElement("td");
+            cell.textContent = toFraction(matrix[i][j]);
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+    stepsContainer.appendChild(table);
+}
+
+
+function transformToLowerTriangular() {
+    const order = parseInt(document.getElementById("matrix-order").value);
+    let matrix = [];
+    for (let i = 0; i < order; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < order; j++) {
+            matrix[i][j] = parseFloat(document.getElementById(`a${i}${j}`).value) || 0;
+        }
+    }
+
+    logStep(matrix, "Initial Matrix:");
+    for (let i = 0; i < order; i++) {
+        for (let j = 0; j < i; j++) {
+            if (matrix[j][j] === 0) continue;
+            let factor = matrix[i][j] / matrix[j][j];
+            for (let k = 0; k < order; k++) {
+                matrix[i][k] -= factor * matrix[j][k];
+            }
+            logStep(matrix, `Eliminate element in row ${i + 1}, column ${j + 1}`);
+        }
+    }
+    logStep(matrix, "Lower Triangular Matrix:");
+}
