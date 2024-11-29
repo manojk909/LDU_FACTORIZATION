@@ -196,3 +196,23 @@ function computeLDU() {
                 U[i][j] -= L[i][k] * D[k][k] * U[k][j];
             }
         }
+
+            D[i][i] = U[i][i];
+        U[i][i] = 1;
+
+
+        for (let j = i + 1; j < order; j++) {
+            L[j][i] = A[j][i];
+            for (let k = 0; k < i; k++) {
+                L[j][i] -= L[j][k] * D[k][k] * U[k][i];
+            }
+            L[j][i] /= D[i][i];
+        }
+    }
+
+    logStep(L, "Matrix L (Lower Triangular):");
+    logStep(D, "Matrix D (Diagonal):");
+    logStep(U, "Matrix U (Upper Triangular):");
+
+    reconstructMatrix(A, L, D, U);
+}
