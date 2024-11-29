@@ -182,3 +182,17 @@ function computeLDU() {
             A[i][j] = parseFloat(document.getElementById(`a${i}${j}`).value) || 0;
         }
     }
+
+    for (let i = 0; i < order; i++) {
+        L[i][i] = 1;
+    }
+
+
+    for (let i = 0; i < order; i++) {
+
+        for (let j = i; j < order; j++) {
+            U[i][j] = A[i][j];
+            for (let k = 0; k < i; k++) {
+                U[i][j] -= L[i][k] * D[k][k] * U[k][j];
+            }
+        }
