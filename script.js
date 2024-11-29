@@ -84,3 +84,66 @@ function transformToLowerTriangular() {
     }
     logStep(matrix, "Lower Triangular Matrix:");
 }
+
+function transformToUpperTriangular() {
+    const order = parseInt(document.getElementById("matrix-order").value);
+    let matrix = [];
+    for (let i = 0; i < order; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < order; j++) {
+            matrix[i][j] = parseFloat(document.getElementById(`a${i}${j}`).value) || 0;
+        }
+    }
+
+    logStep(matrix, "Upper Triangular Matrix:");
+    for (let i = 0; i < order; i++) {
+        for (let j = i + 1; j < order; j++) {
+            if (matrix[i][i] === 0) continue;
+            let factor = matrix[j][i] / matrix[i][i];
+            for (let k = 0; k < order; k++) {
+                matrix[j][k] -= factor * matrix[i][k];
+            }
+            logStep(matrix, `Eliminate element in row ${j + 1}, column ${i + 1}`);
+        }
+    }
+    createDiagonalMatrix(matrix);
+}
+
+
+function createDiagonalMatrix(matrix) {
+    const order = matrix.length;
+    let diagonalMatrix = [];
+    for (let i = 0; i < order; i++) {
+        diagonalMatrix[i] = [];
+        for (let j = 0; j < order; j++) {
+            diagonalMatrix[i][j] = (i === j) ? matrix[i][j] : 0;
+        }
+    }
+    logStep(diagonalMatrix, "Diagonal Matrix:");
+}
+
+
+function transformToUpperIdentity() {
+    const size = parseInt(document.getElementById("matrix-order").value);
+    let matrix = Array.from({ length: size }, (_, i) => 
+        Array.from({ length: size }, (_, j) => parseFloat(document.getElementById(`a${i}${j}`).value) || 0)
+    );
+
+    for (let i = 0; i < size; i++) {
+        if (matrix[i][i] !== 1) {
+            const factor = matrix[i][i];
+            for (let j = i; j < size; j++) {
+                matrix[i][j] /= factor;
+            }
+            addStep(`R${i + 1} / ${toFraction(factor)}`, matrix);
+        }
+        for (let k = i + 1; k < size; k++) {
+            const factor = matrix[k][i] / matrix[i][i];
+            for (let j = i; j < size; j++) {
+                matrix[k][j] -= factor * matrix[i][j];
+            }
+            addStep(`R${k + 1} - ${toFraction(factor)} * R${i + 1}`, matrix);
+        }
+    }
+}
+
